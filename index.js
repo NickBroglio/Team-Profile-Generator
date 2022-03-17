@@ -10,46 +10,32 @@ const distPath = path.join(DIST_DIR, 'team.html');
 
 const render = require('./src/page-template.js');
 
+// Array for team members
 const teamMembers = [];
-// Create an id array to store the ids.
-// This array will be used to check the potential duplicate id newly entered by user
+
+// Array for the id number
 const idArray = [];
 
-// Inform user of usage
 console.log(
   '\nWelcome to the team generator!\nUse `npm run reset` to reset the dist/ folder\n'
 );
 
+// creates the prompts for the questions
 function appMenu() {
-  // Create manager first, then the manager will create a team
-  // Once manager is craeted, we will create team by asking the user which type of employee to create
-  // Based on the choice, we will create that employee object
-  // Loop throu the create team function until user is done from creating employees for the team
-  // then we will use the employee objects created to render html for the team
-
+// creates the function for creating manager questions
   function createManager() {
     console.log('Please build your team 👥');
     inquirer
       .prompt([
-        //
-        // TODO: YOUR CODE HERE:
-        // CREATE REST OF QUESTIONS HERE FOR MANAGER
-        // Strongly recommend to add validate property function for id and email
-        //
+        
         {
           type: 'input',
           name: 'managerName',
           message: "What is the team manager's name?",
-          validate: (answer) => {
-            if (answer !== '') {
-              return true;
-            }
-            return 'Please enter at least one character.';
-          },
         },
         {
           type: 'input',
-          name: 'managerID',
+          name: 'managerId',
           message: 'What is your ID number?',
           validate: (answer) => {
             if (answer !== '') {
@@ -71,14 +57,8 @@ function appMenu() {
         },
         {
           type: 'input',
-          name: 'managerOfficeNumber',
+          name: 'officeNumber',
           message: 'What is your office number?',
-          validate: (answer) => {
-            if (answer !== '') {
-              return true;
-            }
-            return 'Please enter at least one character.';
-          },
         },
       ])
       .then((answers) => {
@@ -86,14 +66,14 @@ function appMenu() {
           answers.managerName,
           answers.managerId,
           answers.managerEmail,
-          answers.managerOfficeNumber
+          answers.officeNumber
         );
         teamMembers.push(manager);
         idArray.push(answers.managerId);
         createTeam();
       });
   }
-
+// prompts user to choose if adding more team members
   function createTeam() {
     inquirer
       .prompt([
@@ -121,24 +101,15 @@ function appMenu() {
         }
       });
   }
-
+// creates the function for creating engineer questions
   function addEngineer() {
     inquirer
       .prompt([
-        //
-        // TODO: YOUR CODE HERE
-        // CREATE OBJECTS OF QUESTIONS FOR ENGINEER
-        //
+     
         {
           type: 'input',
           name: 'engineerName',
           message: 'What is your name?',
-          validate: (answer) => {
-            if (answer !== '') {
-              return true;
-            }
-            return 'Please enter at least one character.';
-          },
         },
         {
           type: 'input',
@@ -164,29 +135,17 @@ function appMenu() {
         },
         {
           type: 'input',
-          name: 'engineerGitHub',
+          name: 'github',
           message: 'Enter your GitHub user name',
-          validate: (answer) => {
-            if (answer !== '') {
-              return true;
-            }
-            return 'Please enter at least one character.';
-          },
         },
       ])
       .then((answers) => {
-        //
-        // TODO: YOUR CODE HERE
-        // 1. CREATE A VARIABLE TO STORE THE ENGINEER OBJECT INSTANTIATED WITH THE ENGINEER CLASS, PASSING ANSWERS PROPERTIES AS INPUT AURGUMENTS
-        //    TO THE ENGINEER CLASS CONSTRUCTOR
-        // 2. ADD (PUSH) THE ENGINEER VARIABLE TO the teamMembers ARRAY
-        // 3. ADD (PUSH) THE ENGINERR ID TO THE idArray ARRAY
-        //
+       
         const engineer = new Engineer(
           answers.engineerName,
           answers.engineerId,
           answers.engineerEmail,
-          answers.engineerGitHub,
+          answers.github,
         );
         teamMembers.push(engineer);
         idArray.push(answers.engineerId);
@@ -194,24 +153,15 @@ function appMenu() {
         createTeam();
       });
   }
-
+// creates the function for creating intern questions
   function addIntern() {
     inquirer
       .prompt([
-        //
-        // TODO: YOUR CODE HERE
-        // CREATE OBJECTS OF QUESTIONS FOR INTERN
-        //
+     
         {
           type: 'input',
           name: 'internName',
           message: 'What is your name?',
-          validate: (answer) => {
-            if (answer !== '') {
-              return true;
-            }
-            return 'Please enter at least one character.';
-          },
         },
         {
           type: 'input',
@@ -237,29 +187,17 @@ function appMenu() {
         },
         {
           type: 'input',
-          name: 'internSchool',
+          name: 'school',
           message: 'What is your school?',
-          validate: (answer) => {
-            if (answer !== '') {
-              return true;
-            }
-            return 'Please enter at least one character.';
-          },
         },
       ])
       .then((answers) => {
-        //
-        // TODO: YOUR CODE HERE
-        // 1. CREATE A VARIABLE TO STORE THE INTERN OBJECT INSTANTIATED WITH THE INTERN CLASS, PASSING ANSWERS PROPERTIES AS INPUT AURGUMENTS
-        //    TO THE INTERN CLASS CONSTRUCTOR
-        // 2. ADD (PUSH) THE INTERN VARIABLE TO the teamMembers ARRAY
-        // 3. ADD (PUSH) THE INTERN ID TO THE idArray ARRAY
-        //
+      
         const intern = new Intern(
           answers.internName,
           answers.internId,
           answers.internEmail,
-          answers.internGitHub,
+          answers.school,
         );
         teamMembers.push(intern);
         idArray.push(answers.engineerId);
@@ -271,7 +209,7 @@ function appMenu() {
   }
 
   function buildTeam() {
-    // Create the output directory if the dist path doesn't exist
+    
     if (!fs.existsSync(DIST_DIR)) {
       fs.mkdirSync(DIST_DIR);
     }
