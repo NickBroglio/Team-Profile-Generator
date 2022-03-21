@@ -21,7 +21,7 @@
   ## Usage
   ![html](./images/html.png)
   
-  ![recording](teamrecording.mov)
+  ![recording](teamrecord.mov)
   
   
   ## Contributing
