@@ -21,7 +21,7 @@
   ## Usage
   ![html](./images/html.png)
   
-  ![recording](https://www.youtube.com/watch?v=_1BH2VNQ7D4)
+  [recording](https://www.youtube.com/watch?v=_1BH2VNQ7D4)
   
   
   ## Contributing
