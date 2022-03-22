@@ -21,7 +21,8 @@
   ## Usage
   ![html](./images/html.png)
   
-  [recording](https://www.youtube.com/watch?v=_1BH2VNQ7D4)
+  ## Walkthrough Video Link
+  [Video Link](https://www.youtube.com/watch?v=_1BH2VNQ7D4)
   
   
   ## Contributing
